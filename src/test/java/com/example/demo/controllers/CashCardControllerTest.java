@@ -13,8 +13,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.net.URI;
 
+/*
+This lab is a continuous example of the Red, Green, Refactor development loop we learned about in a previous lesson.
+
+As we refactor, our tests will periodically fail when we run them. We'll know we've successfully removed all hard-coded
+data from our Controller and "migrated" that data (and data management) to a database-backed Repository when our tests pass again.
+ */
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class CashCardApplicationTests {
+
+    //Autowired in principe alleen in tests gebruiken
     @Autowired
     TestRestTemplate restTemplate;
 

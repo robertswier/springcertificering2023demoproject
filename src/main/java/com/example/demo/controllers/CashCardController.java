@@ -19,10 +19,19 @@ import java.util.Optional;
 public class CashCardController {
     private CashCardRepository cashCardRepository;
 
+    /*
+    Dit is de voorkeur injection methode, beter dan Autowired
+
+    Spring's Auto Configuration is utilizing its dependency injection (DI) framework, specifically constructor injection, to supply CashCardController with the correct implementation of CashCardRepository at runtime.
+     */
     public CashCardController(CashCardRepository cashCardRepository) {
         this.cashCardRepository = cashCardRepository;
     }
 
+    /*
+    @PathVariable makes Spring Web aware of the requestedId supplied in the HTTP request.
+    Now it’s available for us to use in our handler method.
+     */
     @GetMapping("/{requestedId}")
     public ResponseEntity<CashCard> findById(@PathVariable Long requestedId) {
         Optional<CashCard> cashCardOptional = cashCardRepository.findById(requestedId);
