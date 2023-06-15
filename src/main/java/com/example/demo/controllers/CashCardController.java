@@ -2,6 +2,9 @@ package com.example.demo.controllers;
 
 import com.example.demo.model.CashCard;
 import com.example.demo.repositories.CashCardRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -40,6 +44,36 @@ public class CashCardController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping()
+    public ResponseEntity<Iterable<CashCard>> findAll() {
+        return ResponseEntity.ok(cashCardRepository.findAll());
+    }
+
+    /*
+    NB ook repos aanpassen: PagingAndSortingRepository<CashCard, Long>
+
+The URI we are requesting contains both pagination and sorting information: /cashcards?page=0&size=1&sort=amount,desc
+
+page=0: Get the first page. Page indexes start at 0.
+size=1: Each page has size 1.
+sort=amount,desc
+
+/cashcards/paged?page=0&size=1&sort=amount,desc
+
+Spring provides the default page and size values (they are 0 and 20, respectively).
+     */
+    @GetMapping("/paged")
+    public ResponseEntity<List<CashCard>> findAll(Pageable pageable) {
+        Page<CashCard> page = cashCardRepository.findAll(
+                PageRequest.of(
+                        pageable.getPageNumber(),
+                        pageable.getPageSize(),
+                        pageable.getSort()
+//                        pageable.getSortOr(Sort.by(Sort.Direction.ASC, "amount"))
+                ));
+        return ResponseEntity.ok(page.getContent());
     }
 
     /*
