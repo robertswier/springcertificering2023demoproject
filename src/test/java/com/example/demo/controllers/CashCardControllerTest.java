@@ -26,6 +26,9 @@ class CashCardApplicationTests {
     @Autowired
     TestRestTemplate restTemplate;
 
+    /*
+    Let op de methode om de response uit te parsen en daar velden zoals id en amount uit te halen
+     */
     @Test
     void shouldReturnACashCardWhenDataIsSaved() {
         ResponseEntity<String> response = restTemplate.getForEntity("/cashcards/99", String.class);

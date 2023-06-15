@@ -19,7 +19,7 @@ public class CashCardJsonTest {
     private JacksonTester<CashCard> json;
 
     /*
-    File expected.json wordt ingelezen. Deze file bevat de json zoals die verwacht wordt als je het cashCard
+    File expectedsingle.json wordt ingelezen. Deze file bevat de json zoals die verwacht wordt als je het cashCard
      object omzet naar een json.
 
      */
@@ -27,7 +27,7 @@ public class CashCardJsonTest {
     public void cashCardSerializationTest() throws IOException {
         CashCard cashCard = new CashCard(99L, 123.45);
 //        Deze file word tin hetzelfde folderpad gezocht als de package
-        assertThat(json.write(cashCard)).isStrictlyEqualToJson("expected.json");
+        assertThat(json.write(cashCard)).isStrictlyEqualToJson("expectedsingle.json");
         assertThat(json.write(cashCard)).hasJsonPathNumberValue("@.id");
         assertThat(json.write(cashCard)).extractingJsonPathNumberValue("@.id")
                 .isEqualTo(99);

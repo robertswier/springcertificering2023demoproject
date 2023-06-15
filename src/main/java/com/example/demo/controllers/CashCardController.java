@@ -42,6 +42,9 @@ public class CashCardController {
         }
     }
 
+    /*
+    Let op UriComponentsBuilder ucb: injected door spring: deze helpt om de waarde van de id te achter halen en dez ein de location header te zetten conform de REST voorschrift
+     */
     @PostMapping
     private ResponseEntity<Void> createCashCard(@RequestBody CashCard newCashCardRequest, UriComponentsBuilder ucb) {
         CashCard savedCashCard = cashCardRepository.save(newCashCardRequest);
