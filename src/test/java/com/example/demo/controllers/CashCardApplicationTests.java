@@ -38,6 +38,9 @@ class CashCardApplicationTests {
 
     /*
     Let op de methode om de response uit te parsen en daar velden zoals id en amount uit te halen
+
+    DocumentContext documentContext = JsonPath.parse(response.getBody());
+This converts the response String into a JSON-aware object with lots of helper methods.
      */
     @Test
     void shouldReturnACashCardWhenDataIsSaved() {
