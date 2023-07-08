@@ -109,6 +109,7 @@ https://github.com/json-path/JsonPath
     @Test
     void shouldReturnAllCashCardsWhenListIsRequested() {
         ResponseEntity<String> response = restTemplate.getForEntity("/cashcards", String.class);
+//        ResponseEntity<String> response = restTemplate.getForEntity("/cashcards/paged", String.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 
         DocumentContext documentContext = JsonPath.parse(response.getBody());

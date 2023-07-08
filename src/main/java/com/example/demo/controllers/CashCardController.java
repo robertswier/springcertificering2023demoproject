@@ -49,10 +49,10 @@ met security:
 //    public ResponseEntity<CashCard> findById(@PathVariable Long requestedId, Principal principal) {
 //        CashCard cashCard = findCashCard(requestedId, principal);
 //
-//    @GetMapping()
-//    public ResponseEntity<Iterable<CashCard>> findAll() {
-//        return ResponseEntity.ok(cashCardRepository.findAll());
-//    }
+    @GetMapping()
+    public ResponseEntity<Iterable<CashCard>> findAll() {
+        return ResponseEntity.ok(cashCardRepository.findAll());
+    }
 
     /*
     NB ook repos aanpassen: PagingAndSortingRepository<CashCard, Long>
