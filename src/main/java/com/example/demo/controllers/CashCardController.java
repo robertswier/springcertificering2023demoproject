@@ -42,10 +42,17 @@ public class CashCardController {
         }
     }
 
-    @GetMapping()
-    public ResponseEntity<Iterable<CashCard>> findAll() {
-        return ResponseEntity.ok(cashCardRepository.findAll());
-    }
+/*
+met security:
+ */
+//    @GetMapping("/{requestedId}")
+//    public ResponseEntity<CashCard> findById(@PathVariable Long requestedId, Principal principal) {
+//        CashCard cashCard = findCashCard(requestedId, principal);
+//
+//    @GetMapping()
+//    public ResponseEntity<Iterable<CashCard>> findAll() {
+//        return ResponseEntity.ok(cashCardRepository.findAll());
+//    }
 
     /*
     NB ook repos aanpassen: PagingAndSortingRepository<CashCard, Long>
@@ -119,6 +126,9 @@ Finally, we return 201 CREATED with the correct Location header.
         return ResponseEntity.created(locationOfNewCashCard).build();
     }
 
+    /*
+    PUT voor update
+     */
     @PutMapping("/{requestedId}")
     private ResponseEntity<Void> putCashCard(@PathVariable Long requestedId, @RequestBody CashCard cashCardUpdate) {
         CashCard cashCard = cashCardRepository.findByIdAndOwner(requestedId, "sarah1");
@@ -130,4 +140,18 @@ Finally, we return 201 CREATED with the correct Location header.
 
         return ResponseEntity.noContent().build();
     }
+
+//    /*
+//    met security:
+//     */
+//    @GetMapping("/{requestedId}")
+//    public ResponseEntity<CashCard> findById(@PathVariable Long requestedId, Principal principal) {
+//        CashCard cashCard = cashCardRepository.findByIdAndOwner(requestedId, principal.getName());
+//        if (cashCard != null) {
+//            return ResponseEntity.ok(cashCard);
+//        } else {
+//            return ResponseEntity.notFound().build();
+//        }
+//    }
+
 }
